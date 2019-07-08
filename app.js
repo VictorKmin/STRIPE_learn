@@ -2,10 +2,12 @@ const express = require('express');
 const stripe = require('stripe')('sk_test_CWDPF3V7XPJryz0uWsTVk0NZ00EoBs4eix');
 const app = express();
 const hbs = require('hbs');
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.set('view engine', "hbs");
 app.set('views', __dirname + '/views');
-app.use(express.json());
 const secretKey = 'sk_test_CWDPF3V7XPJryz0uWsTVk0NZ00EoBs4eix';
 const publishKey = 'pk_test_TpdI3dm1akX9lS8c630o8Hez00vTBYutYI';
 
