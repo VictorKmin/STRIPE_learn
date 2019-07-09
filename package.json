@@ -2,10 +2,11 @@
   "name": "untitled",
   "version": "1.0.0",
   "dependencies": {
+    "body-parser": "latest",
     "express": "^4.17.1",
     "handlebars": "^4.1.2",
     "hbs": "^4.0.4",
-    "stripe": "^7.4.0",
-    "body-parser": "latest"
+    "mysql2": "^1.6.5",
+    "stripe": "^7.4.0"
   }
 }

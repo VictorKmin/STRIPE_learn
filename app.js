@@ -11,25 +11,29 @@ app.set('views', __dirname + '/views');
 const secretKey = 'sk_test_CWDPF3V7XPJryz0uWsTVk0NZ00EoBs4eix';
 const publishKey = 'pk_test_TpdI3dm1akX9lS8c630o8Hez00vTBYutYI';
 
-app.get('/', (req, res)=> {
+const pool = require('./dataBase/index');
+
+app.get('/', (req, res) => {
     res.render('index')
 });
 
-app.get('/success', (req,res)=> {
+app.get('/success', (req, res) => {
     res.render('success')
 });
 
-app.post('/pay', async (req, res)=> {
+app.post('/pay', async (req, res) => {
     let stripeToken = req.body.stripeToken;
-    console.log(req.body);
+    let stripeEmail = req.body.stripeEmail;
     console.log(stripeToken);
+    console.log(stripeEmail);
     const charge = await stripe.charges.create({
         amount: "3000",
         currency: 'usd',
         source: stripeToken,
         description: 'bla-bla-bla',
         statement_descriptor: 'Custom descriptor'
-    })
+    });
+    await pool.promise().query(`INSERT INTO tokens(id, email, token) VALUES (DEFAULT, "${stripeEmail}", "${stripeToken}")`);
     res.redirect('/success')
 });
 app.listen(3000, err => {
