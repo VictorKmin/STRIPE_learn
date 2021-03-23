@@ -18,7 +18,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/success', (req, res) => {
-    res.render('success')
+  console.log('HELLO')
+  res.render('success')
 });
 
 app.post('/pay', async (req, res) => {
